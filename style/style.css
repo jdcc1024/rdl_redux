@@ -1,0 +1,37 @@
+body {
+	font-family: arial;
+}
+
+td {
+	text-align: center;
+	border: 1px solid black;
+	width: 20px;
+	height: 20px;
+	padding: 5px;
+	margin: 5px;
+}
+
+table, th {
+   border: 3px solid black;
+   background-color: grey;
+   margin: 10px;
+}
+
+.teamName {
+	width: 300px;
+	font-style: bold;
+	font-family: arial;
+	background-color: yellow;
+}
+
+.score-loss {
+	background-color: red;
+}
+
+.score-win {
+	background-color: green;
+}
+
+.score-unknown {
+	background-color: #DCDCDC;
+}
