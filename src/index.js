@@ -19,7 +19,7 @@ import Matchup from './components/matchup';
 
 const App = () => {
 	return (
-			<Matchup numGames='5'></Matchup>		
+			<Matchup numGames='5' teamA="Eva's Emus" teamB="Brady's Beavers"></Matchup>		
 	);
 }
 

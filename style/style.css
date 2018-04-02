@@ -1,3 +1,8 @@
+html {
+	background-color: #e2f7ff;
+}
+
+
 body {
 	font-family: arial;
 }
@@ -5,31 +10,51 @@ body {
 td {
 	text-align: center;
 	border: 1px solid black;
+	border-radius: 5px;
+	margin: 10px;
 	width: 20px;
 	height: 20px;
-	padding: 5px;
-	margin: 5px;
+	padding: 10px;
+	
 }
 
 table, th {
    border: 3px solid black;
+   border-collapse: separate;
+   border-spacing: 5px;
+   border-radius: 10px;
    background-color: grey;
+   /*background-color: #F15F22;*/
+
    margin: 10px;
+   /*width: 75%;*/
+   align-self: center;
+}
+
+.rdlblue {
+	color: #008FD4;
+	/*darkercolor: #0077b1;*/
+}
+
+.rdlorange {
+	/*lightercolor: #ff9b1f;*/
+	color: #F15F22;
 }
 
 .teamName {
 	width: 300px;
-	font-style: bold;
+	font-weight: bold;
 	font-family: arial;
-	background-color: yellow;
+	color: #ff9b1f;
+	background-color: #0077b1;
 }
 
 .score-loss {
-	background-color: red;
+	background-color: #ec7c7c;
 }
 
 .score-win {
-	background-color: green;
+	background-color: #67e467;
 }
 
 .score-unknown {
