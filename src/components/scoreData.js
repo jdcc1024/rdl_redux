@@ -9,7 +9,7 @@ class ScoreData extends Component {
 			key: props.key,
 			index: props.index,
 			team: props.team,
-			updMatchup: props.click
+			updMatchup: props.updMatchup
 		};	
 		this.onClick = this.onClick.bind(this);
 	}
@@ -28,10 +28,10 @@ class ScoreData extends Component {
 	}
 	
 	onClick() {
-		if (this.state.score == "win") {
-			this.state.updMatchup(this.state.index, "loss", this.state.team);
+		if (this.state.score == "unknown" || this.state.score == "loss") {
+			this.state.updMatchup(this.state.index, "win", this.state.team);		
 		} else {
-			this.state.updMatchup(this.state.index, "win", this.state.team);
+			this.state.updMatchup(this.state.index, "unknown", this.state.team);
 		}
 	}
 	

@@ -1,6 +1,7 @@
-import React from 'react';
+import React ,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import Matchup from './components/matchup';
+import Timeslot from './components/timeslot';
 
 // import { Provider } from 'react-redux';
 // import { createStore, applyMiddleware } from 'redux';
@@ -17,11 +18,38 @@ import Matchup from './components/matchup';
 //   , document.querySelector('.container')
 //   );
 
-const App = () => {
-	return (
-			<Matchup numGames='5' teamA="Eva's Emus" teamB="Brady's Beavers"></Matchup>		
-	);
+class App extends Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			selectedMatch: null,
+			numGames: 5,
+			numClicks: 0,
+			// teams: [] // once we have state from backend, use that to fill array
+			teams: ["Eva's Emus", "Brady's Beavers", "Horace's Horses", "Jess' Jellyfish"]
+		};
+
+		this.setState = {teams: ["Eva's Emus", "Brady's Beavers", "Horace's Horses", "Jess' Jellyfish"]};
+	}
+	
+			// week: this.props.week,
+			// gym: this.props.gym,
+			// timeslot: this.props.timeslot,
+			// numGames: this.props.numGames,
+			// selectedMatch: null,
+			// teams: this.props.teams,
+			// permutations: permutations,
+			// numClicks: 0
+
+	// Eventually turn timeslot into JSON with ID and Descr
+	render() {
+	 	return (	 		
+	 		<div>
+	 			<Timeslot gym="Spul'u'kwuks" timeslot="7:30" numGames='5' teams={this.state.teams}></Timeslot>
+	 		</div>
+	 		);
+	 }
 }
 
-// React.render(App);
 ReactDOM.render(<App/>, document.querySelector('.container'));

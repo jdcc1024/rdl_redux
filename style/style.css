@@ -1,3 +1,4 @@
+/* More General stuff up top, more specific stuff down low */
 html {
 	background-color: #e2f7ff;
 }
@@ -7,7 +8,20 @@ body {
 	font-family: arial;
 }
 
+div {
+	align-content: center;
+}
+button {
+	flex-grow: 1;
+	margin: 2px;
+}
+
 td {
+	padding: 10px;
+	margin: 10px;
+}
+
+td.score {
 	text-align: center;
 	border: 1px solid black;
 	border-radius: 5px;
@@ -18,7 +32,8 @@ td {
 	
 }
 
-table, th {
+
+table.matchup, th.matchup {
    border: 3px solid black;
    border-collapse: separate;
    border-spacing: 5px;
@@ -31,6 +46,38 @@ table, th {
    align-self: center;
 }
 
+table.table-selected {
+   border: 3px solid black;
+   border-collapse: separate;
+   border-spacing: 5px;
+   border-radius: 10px;
+   background-color: #ffbc3d;
+   /*background-color: #F15F22;*/
+
+   margin: 10px;
+   /*width: 75%;*/
+   align-self: center;
+}
+
+table.table-deselected {
+
+}
+
+button.score-btn {
+	border: 3px solid #0077b1;
+	border-radius: 10px;
+	align-self: center;
+	background-color: #ff9b1f;
+	font-weight: bold;
+	font-family: Trebuchet MS;
+	font-size: 18px;
+	color: #0077b1;
+	width: 100%;
+	height: 100px;
+	padding: 10px;
+	margin: 0px;
+}
+
 .rdlblue {
 	color: #008FD4;
 	/*darkercolor: #0077b1;*/
@@ -41,12 +88,17 @@ table, th {
 	color: #F15F22;
 }
 
-.teamName {
+td.teamName {
 	width: 300px;
+	padding: 1px;
+	margin: 1px;
 	font-weight: bold;
 	font-family: arial;
 	color: #ff9b1f;
 	background-color: #0077b1;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 5px;
 }
 
 .score-loss {
