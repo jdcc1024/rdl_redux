@@ -6,7 +6,6 @@ class ScoreData extends Component {
 
 		this.state = {
 			score: props.score,
-			key: props.key,
 			index: props.index,
 			team: props.team,
 			updMatchup: props.updMatchup
@@ -23,8 +22,9 @@ class ScoreData extends Component {
 			return <td className='score score-loss' onClick={this.onClick}></td>
 		} else if (this.props.score == "win") {
 			return <td className='score score-win' onClick={this.onClick}></td>
+		} else { 
+			return <td className='score' onClick={this.onClick}></td> 
 		}
-		else { return <td className='score' onClick={this.onClick}></td>}
 	}
 	
 	onClick() {

@@ -6,7 +6,7 @@ const scoreEntry = (props) => {
 
 	// convert list of values to td
 	const scores = props.teamScore.map((score) => {
-		console.log(score);
+		// console.log(score);
 		if (score==0) {
 			return <ScoreData score="unknown"></ScoreData>;
 		} else if (score < 0) {

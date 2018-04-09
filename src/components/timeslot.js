@@ -4,7 +4,7 @@ import Matchup from './matchup';
  class timeslot extends Component {
 
 	constructor(props) {
-		console.log("Init timeslot!");
+		// console.log("Init timeslot!");
 		super(props);
 		var permutations = [
 			{id: 0, home: 0, away: 1},
@@ -31,6 +31,7 @@ import Matchup from './matchup';
 		this.incrementClick = this.incrementClick.bind(this);
 		this.calculateScores = this.calculateScores.bind(this);
 		this.onSelectedMatch = this.onSelectedMatch.bind(this);
+		this.adjustScore = this.adjustScore.bind(this);
 	}
 
 	componentDidMount() {
@@ -38,7 +39,7 @@ import Matchup from './matchup';
 	}
 
 	render() {
-		console.log("Render Timeline");
+		// console.log("Render Timeline");
 		var teams = this.props.teams;
 
 		var gameOptions = this.renderGameData();	
@@ -104,9 +105,19 @@ import Matchup from './matchup';
 		});
 	}
 
-	adjustScore(team, action) {
-		console.log(team);
-		console.log(action);
+	adjustScore(team, adjustment) {
+		// var ts = this.state.teamScore;
+		var ts = this.state.teamScore.map((curTeam) => {
+			if (team == curTeam.team) {
+				// console.log("Adjusting Score for " + team + " by " + adjustment);
+				var newWins = curTeam.wins + adjustment;
+				return {team: curTeam.team, wins: newWins, losses: curTeam.losses, spirit: curTeam.spirit, favourite: curTeam.favourite};
+				// this.setState({team[curTeam].wins: })
+			}
+			return curTeam;
+		})
+		this.setState({teamScore: ts});
+		// console.log(ts);
 	}
 
 	onSelectedMatch(id) {

@@ -29,7 +29,10 @@ class App extends Component {
 			// teams: [] // once we have state from backend, use that to fill array
 			teams: ["Eva's Emus", "Brady's Beavers", "Horace's Horses", "Jess' Jellyfish"]
 		};
+	}
 
+	componentDidMount() {
+		// console.log("Mounted!");
 		this.setState = {teams: ["Eva's Emus", "Brady's Beavers", "Horace's Horses", "Jess' Jellyfish"]};
 	}
 	

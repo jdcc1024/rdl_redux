@@ -27,7 +27,7 @@ class matchup extends Component {
 	}
 
 	render() {			
-		console.log("Render Matchup: " + this.props.teamA + " vs " + this.props.teamB);
+		// console.log("Render Matchup: " + this.props.teamA + " vs " + this.props.teamB);
 		var div_teamA = this.renderScoreData(this.state.teamA, this.state.teamAScore);
 		var div_teamB = this.renderScoreData(this.state.teamB, this.state.teamBScore);
 		var gameData = this.renderGameData();
@@ -93,7 +93,6 @@ class matchup extends Component {
 	}
 
 	tableSelected() {
-		console.log("Selected Table");
 		if (this.props.tableSelected == "false") {
 			return this.setState({tableSelected: "true"});
 		}
@@ -103,21 +102,37 @@ class matchup extends Component {
 	updMatchup(scoreIndex, scoreValue, team) {
 		console.log("Updating ScoreIndex: " + scoreIndex + " with: " + scoreValue + " on Team: " + team);
 		var oppositeValue = null;
+		var itWasAWin = true;
 		if (scoreValue == "unknown") { 
 			oppositeValue = "unknown"; 
 		} else {		
-		 oppositeValue = (scoreValue == "win") ? "loss" : "win";
+		 // oppositeValue = (scoreValue == "win") ? "loss" : "win";
+		 	if (scoreValue == "win") {
+		 		itWasAWin = true;
+		 		oppositeValue = "loss";
+		 	} else {
+		 		oppositeValue = "win";
+		 		itWasAWin = false;
+		 	}
 		}
+
 		var scoreA = this.state.teamAScore;
 		var scoreB = this.state.teamBScore;
-	
+
 		// set teamA and teamB 
 		if (team == "teamA") {
 			scoreA[scoreIndex].score = scoreValue;
 			scoreB[scoreIndex].score = oppositeValue;
+			if (scoreValue == "win")  this.state.adjustScore(this.state.teamA, 1);
+			if (scoreValue == "unknown") this.state.adjustScore(this.state.teamA, -1);
+			// if (scoreValue == "loss") {
+			// 	this.state.adjustScore(this.state.teamA, -1);
+			// 	this.state.adjustScore(this.state.team)
 		} else if (team == "teamB") {
 			scoreA[scoreIndex].score = oppositeValue;
 			scoreB[scoreIndex].score = scoreValue;
+			if (scoreValue == "win") this.state.adjustScore(this.state.teamB, 1);
+			if (scoreValue == "unknown") this.state.adjustScore(this.state.teamB, -1);
 		}
 
 		// not treated as immutable, must fix!
@@ -126,19 +141,20 @@ class matchup extends Component {
 		this.setState({teamBScore: scoreB});
 
 		// how to prevent double counting?
-		var teamATotal = this.state.teamAScore.reduce(function(a,b) {
-			return a+b;
-		},0);
+		var teamATotal = 0;
+		var teamBTotal = 0;
+		this.state.teamBScore.forEach((score) => {
+			// console.log(score.score);
+			teamBTotal += this.convertScoreToValue(score.score);
+		});
+		this.state.teamAScore.forEach((score) => {
+			teamATotal += this.convertScoreToValue(score.score);
+		});
 
-		if (team == "teamA") {
-			if (scoreValue == "win") {
-				this.state.adjustScore(this.state.teamA, 1, this.state.teamB);
-			} else if (scoreValue == "loss") {
-				this.state.adjustScore(this.state.teamA, -1, this.state.teamB);
-			} else if (scoreValue == "unknown") {
-				this.state.adjustScore(this.state.teamA, -1, this.state.teamB);
-			}
-		}
+		// this.state.adjustScore(teamA, wins)
+		console.log("TeamB: " + teamBTotal);
+		console.log("TeamA: " + teamATotal);
+
 	}
 
 	adjustGames(action) {
@@ -154,8 +170,15 @@ class matchup extends Component {
 		this.setState({teamBScore: this.initGames(this.state.teamBScore, this.state.numGames, "teamB")});
 	}	
 
+	convertScoreToValue(score) {
+		if (score == "win") return 1;
+		// if (score == "loss") return -1;
+
+		return 0;
+	}
+
 	randomOutput(event) {
-		console.log(event);
+		// console.log(event);
 	}
 
 	onClick(event) {
