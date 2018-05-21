@@ -2,6 +2,7 @@ import React ,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import Matchup from './components/matchup';
 import Timeslot from './components/timeslot';
+import Scheduler from './components/scheduler/scheduler';
 
 // import { Provider } from 'react-redux';
 // import { createStore, applyMiddleware } from 'redux';
@@ -49,7 +50,15 @@ class App extends Component {
 	render() {
 	 	return (	 		
 	 		<div>
+	 			<div>
+	 			<Scheduler></Scheduler>
+	 			</div>
+	 			<div>
+	 				<hr></hr>
+	 			</div>
+	 			<div>
 	 			<Timeslot gym="Spul'u'kwuks" timeslot="7:30" numGames='5' teams={this.state.teams}></Timeslot>
+	 			</div>
 	 		</div>
 	 		);
 	 }
