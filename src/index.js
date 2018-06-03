@@ -53,7 +53,8 @@ class App extends Component {
 	 			<div>
 	 			<Scheduler></Scheduler>
 	 			</div>
-	 			<div>
+	 			<div className='clear-float'>
+	 				<br></br>
 	 				<hr></hr>
 	 			</div>
 	 			<div>

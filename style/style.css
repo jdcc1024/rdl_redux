@@ -3,6 +3,9 @@ html {
 	background-color: #e2f7ff;
 }
 
+.clear-float {
+	clear: both;
+}
 
 body {
 	font-family: arial;
@@ -111,4 +114,76 @@ td.teamName {
 
 .score-unknown {
 	background-color: #DCDCDC;
+}
+
+#scheduler-left {
+	max-width: 650px;
+	margin: 0 auto;
+}
+
+#scheduler-right {
+	max-width: 450px;
+	margin: 0 auto;
+}
+
+.gym-slot {
+	display: inline-block;
+	background-color: #96d0ec;
+}
+
+.gym-name {	
+	display: inline-block;
+	width: 200px;
+	vertical-align: text-bottom;
+	padding: 1px;
+	margin: 1px;
+	font-weight: bold;
+	font-family: arial;
+	color: #ff9b1f;
+	background-color: #0077b1;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.draggable-obj {
+	cursor: move;
+}
+
+.droppable-area {
+	margin: 3px;
+	padding: 2px;
+	width: 206px;
+	height: 200px;
+	float: left;	
+	background-color: #2c9ed6;
+	border: 1px solid black;
+	border-radius: 5px;
+
+}
+
+.unscheduled-team {	
+	width: 170px;
+	padding: 1px;
+	margin: 1px;
+	font-weight: bold;
+	font-family: arial;
+	color: #ff9b1f;
+	background-color: #0077b1;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.scheduled-team {	
+	width: 150px;
+	padding: 1px;
+	margin: 1px;
+	font-weight: bold;
+	font-family: arial;
+	color: #0077b1;
+	background-color: #ffca88;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 5px;
 }
