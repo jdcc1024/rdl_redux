@@ -14,10 +14,12 @@ import Gym from './gym'
 			unscheduledTeams: []			
 		};
 
-	this.setUnscheduled = this.setUnscheduled.bind(this);
+	// this.setUnscheduled = this.setUnscheduled.bind(this);
 	this.setScheduled 	= this.setScheduled.bind(this);
+	this.setUnscheduled = this.setUnscheduled.bind(this);
 	this.renderGyms 	= this.renderGyms.bind(this);
 	this.renderTeams 	= this.renderTeams.bind(this);
+	this.dropTeam 		= this.dropTeam.bind(this);
 	}
 
 	componentDidMount() {
@@ -42,9 +44,9 @@ import Gym from './gym'
 	}
 
 	render() {
-		console.log("Hello World");
+		// console.log("Hello World");
 		var historyStr = JSON.stringify(this.state.history);
-		console.log(historyStr);
+		// console.log(historyStr);
 
 		var schedule = this.renderTeams();
 		return (
@@ -58,8 +60,24 @@ import Gym from './gym'
 		);
 	}
 
-	setUnscheduled(team) {
+	dragTeam(event, teamName) {
+		event.team = teamName;
+		event.dataTransfer.setData('text/plain', teamName);
+	}
 
+	dropTeam(event, gym, timeslot, side) {
+		console.log("Drop Team!");
+		// console.log(event.target);
+		// console.log(event.dataTransfer.getData('text/plain'));
+		// console.log(event.team);
+		// console.log(gym);
+		// console.log(timeslot);
+		// console.log(side);	
+		this.setScheduled(event.team, gym, timeslot, side);	
+	}
+
+	setUnscheduled(teamName) {
+		this.setScheduled(teamName, "none", 0, "none");
 	}
 
 	setScheduled(teamName, gym, timeslot, side) {
@@ -119,12 +137,12 @@ import Gym from './gym'
 			return (
 				<div key={curGym}>
 				<div>
-					<Gym gym={curGym} key={{curGym} + '0'} className='gym-slot' id={gymSlots[0]} timeslot='700' court='court-a' teamData={this.state.teams}>{gymSlots[0]}</Gym>
-					<Gym gym={curGym} key={{curGym} + '2'} className='gym-slot' id={gymSlots[2]} timeslot='700' court='court-b' teamData={this.state.teams}>{gymSlots[2]}</Gym>
+					<Gym gym={curGym} key={{curGym} + '0'} className='gym-slot' id={gymSlots[0]} timeslot='700' court='court-a' dragTeam={this.dragTeam} unschedule={this.setUnscheduled} handleDrop={this.dropTeam} teamData={this.state.teams}>{gymSlots[0]}</Gym>
+					<Gym gym={curGym} key={{curGym} + '2'} className='gym-slot' id={gymSlots[2]} timeslot='700' court='court-b' dragTeam={this.dragTeam} unschedule={this.setUnscheduled} handleDrop={this.dropTeam} teamData={this.state.teams}>{gymSlots[2]}</Gym>
 				</div>
 					<div>
-					<Gym gym={curGym} key={{curGym} + '1'} className='gym-slot' id={gymSlots[1]} timeslot='830' court='court-a' teamData={this.state.teams}>{gymSlots[1]}</Gym>
-					<Gym gym={curGym} key={{curGym} + '3'} className='gym-slot' id={gymSlots[3]} timeslot='830' court='court-b' teamData={this.state.teams}>{gymSlots[3]}</Gym>
+					<Gym gym={curGym} key={{curGym} + '1'} className='gym-slot' id={gymSlots[1]} timeslot='830' court='court-a' dragTeam={this.dragTeam} unschedule={this.setUnscheduled} handleDrop={this.dropTeam} teamData={this.state.teams}>{gymSlots[1]}</Gym>
+					<Gym gym={curGym} key={{curGym} + '3'} className='gym-slot' id={gymSlots[3]} timeslot='830' court='court-b' dragTeam={this.dragTeam} unschedule={this.setUnscheduled} handleDrop={this.dropTeam} teamData={this.state.teams}>{gymSlots[3]}</Gym>
 					</div>
 				</div>
 			);
@@ -132,12 +150,12 @@ import Gym from './gym'
 
 		// draw unscheduled
 		var unscheduledTeams = this.state.teams.map((curTeam) => {
-			console.log(curTeam);
+			// console.log(curTeam);
 			//(curTeam.name, 'Garden City', '700', 'court-a')
 			if (curTeam.gym == "none" && curTeam.timeslot == 0) {
-				console.log("Add To List: " + curTeam.name);
+				// console.log("Add To List: " + curTeam.name);
 				return (
-					<div className='unscheduled-team' key={curTeam.name} onClick={this.setScheduled.bind(this, curTeam.name, 'Garden City', '700', 'court-a')}>
+					<div className='unscheduled-team' draggable='true' key={curTeam.name} onDragStart={(e) => this.dragTeam(e, curTeam.name)}>
 						{curTeam.name}
 					</div>
 				);

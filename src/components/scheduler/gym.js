@@ -11,10 +11,12 @@ import React, {Component} from 'react';
 			name: this.props.gym,
 			timeslot: this.props.timeslot,
 			court: this.props.court,
-			teamData: this.props.teamData
+			teamData: this.props.teamData,
+			numTeams: 0
 		};
-
-	this.renderGymTeams = this.renderGymTeams.bind(this);
+		this.renderGymTeams = this.renderGymTeams.bind(this);
+		this.checkSchedule 	= this.checkSchedule.bind(this);
+		this.removeTeam 	= this.removeTeam.bind(this);
 	}
 
 	componentDidMount() {
@@ -33,8 +35,8 @@ import React, {Component} from 'react';
 
 		// console.log(this.props);
 		return (
-			<div className='droppable-area'>
-				<div className='gym-name'><div>{this.state.name}</div> {timeslot}PM - {court}</div>
+			<div className='droppable-area' onDragOver={(e) => {e.preventDefault()}} onDrop={(e) => this.checkSchedule(e)}>
+				<div className='gym-name'><div>{this.props.gym}</div> {timeslot}PM - {court}</div>
 				<div>
 					{gymTeams}
 				</div>
@@ -43,12 +45,10 @@ import React, {Component} from 'react';
 	}
 
 	renderGymTeams() {		
-		console.log("Render Gyms!");
-		console.log(this.props);
 		var listTeams = this.props.teamData.map((team) =>{
 			if (team.timeslot == this.props.timeslot && team.side == this.props.court && team.gym == this.props.gym) {
 				return (
-					<li className='scheduled-team' key={team.name}>{team.name}</li>
+					<li className='scheduled-team' draggable='true' onDragStart={(e) => this.checkSchedule(e)} onClick={(e) => this.removeTeam(team.name)} key={team.name}>{team.name}</li>
 				);
 			}
 		});
@@ -58,6 +58,24 @@ import React, {Component} from 'react';
 				{listTeams}
 			</ul>
 		)
+	}
+
+	removeTeam(teamName) {
+		console.log(this.state.numTeams);
+		this.setState({numTeams: this.state.numTeams--});
+		this.props.unschedule(teamName);
+	}
+
+	checkSchedule(event) {		
+		console.log(this.state.numTeams);
+		if (this.state.numTeams < 4) {
+			this.setState({numTeams: this.state.numTeams++});
+			this.props.handleDrop(event, this.props.gym, this.props.timeslot, this.props.court);
+		}
+	}
+
+	calculateConfidence() {
+
 	}
 }
 

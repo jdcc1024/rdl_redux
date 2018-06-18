@@ -163,6 +163,7 @@ td.teamName {
 }
 
 .unscheduled-team {	
+	float: left;
 	width: 170px;
 	padding: 1px;
 	margin: 1px;
@@ -175,7 +176,8 @@ td.teamName {
 	border-radius: 5px;
 }
 
-.scheduled-team {	
+.scheduled-team {
+	float: left;
 	width: 150px;
 	padding: 1px;
 	margin: 1px;
